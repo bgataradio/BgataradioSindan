@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>30代男性B型ラジオ診断</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+    .question { margin: 20px 0; }
+    button { padding: 10px; margin: 5px; font-size: 16px; }
+    #result { margin-top: 30px; background: #fff; padding: 20px; border-radius: 8px; display: none; }
+  </style>
+</head>
+<body>
+  <h1>30代男性B型ラジオ診断</h1>
+  <p>5つの質問にYES/NOで答えてください。</p>
+  <div id="quiz">
+    <div class="question" data-index="0">1. 最近ちょっと疲れてる？<br>
+      <button onclick="answer(0,true)">YES</button>
+      <button onclick="answer(0,false)">NO</button>
+    </div>
+    <div class="question" data-index="1" style="display:none">2. 雑談系ポッドキャストが好き？<br>
+      <button onclick="answer(1,true)">YES</button>
+      <button onclick="answer(1,false)">NO</button>
+    </div>
+    <div class="question" data-index="2" style="display:none">3. 懐かしい話を聞くのが好き？<br>
+      <button onclick="answer(2,true)">YES</button>
+      <button onclick="answer(2,false)">NO</button>
+    </div>
+    <div class="question" data-index="3" style="display:none">4. ゆるい会話が心地よい？<br>
+      <button onclick="answer(3,true)">YES</button>
+      <button onclick="answer(3,false)">NO</button>
+    </div>
+    <div class="question" data-index="4" style="display:none">5. 30代あるあるに共感しがち？<br>
+      <button onclick="answer(4,true)">YES</button>
+      <button onclick="answer(4,false)">NO</button>
+    </div>
+  </div>
+  <div id="result"></div>
+  <script>
+    const answers = [];
+    function answer(i, val) {
+      answers[i] = val;
+      document.querySelector(`[data-index="${i}"]`).style.display = 'none';
+      if (i < 4) {
+        document.querySelector(`[data-index="${i+1}"]`).style.display = 'block';
+      } else showResult();
+    }
+    function showResult() {
+      const yesCount = answers.filter(Boolean).length;
+      const r = document.getElementById("result");
+      r.style.display = "block";
+      let msg = "";
+      if (yesCount <= 1) {
+        msg = 'おすすめ回：<strong>第10回「絶妙にどうでもいい話」</strong><br><a href="https://open.spotify.com/episode/1N2VCxWeKozTzF9sD1hAsF" target="_blank">Spotifyで聴く</a>';
+      } else if (yesCount <= 3) {
+        msg = 'おすすめ回：<strong>第32回「タレスと田中みな実」</strong><br><a href="https://open.spotify.com/episode/3O4G6EkECkZ65zXn8GMqRH" target="_blank">Spotifyで聴く</a>';
+      } else {
+        msg = 'おすすめ回：<strong>第34回「ギチギチのエビ」</strong><br><a href="https://open.spotify.com/episode/5VVuM0DdcoTjVuURzFYSp1" target="_blank">Spotifyで聴く</a>';
+      }
+      r.innerHTML = "<h2>診断結果</h2><p>" + msg + "</p>";
+    }
+  </script>
+</body>
+</html>
